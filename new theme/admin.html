@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin & Operations Portal • EscapeLuxe</title>
+    <meta name="description" content="Unified operational portal for inventory, pricelist rules, dispatches, flexible invoices, and analytics.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Nav -->
+    <nav class="luxe-nav">
+        <a href="index.html" class="luxe-logo">
+            <span class="logo-badge">ADMIN</span>
+            EscapeLuxe Operations
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Customer View</a></li>
+            <li><a href="catalog.html">Store</a></li>
+            <li><a href="returns.html">Customer Tracker</a></li>
+            <li><a href="admin.html" class="active">Admin Console</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">● SYSTEM ONLINE</span>
+            <a href="../index.html" class="btn-switch-theme">White & Gold Theme →</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="catalog-wrapper" style="max-width: 1200px;">
+        <!-- Admin Title Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="text-align: left;">
+                <span class="section-tag">End User Portal</span>
+                <h1 style="font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;">Operations Control Center</h1>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Manage inventory units, pricelists, handovers, returns, and export financial statements.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="btn-trigger-cron" class="btn btn-secondary" style="font-size: 0.82rem;">⚡ Run Pre-Return Cron Scan</button>
+                <a href="/api/admin/reports/export-csv" class="btn btn-primary" style="font-size: 0.82rem;">📥 Export CSV Ledger</a>
+            </div>
+        </div>
+
+        <!-- 7-Module Navigation Tabs (Matching Sitemap Blueprint) -->
+        <div style="display: flex; gap: 8px; margin-bottom: 2.5rem; overflow-x: auto; padding-bottom: 6px;">
+            <button class="cat-tab active" data-target="tab-dashboard">📊 Dashboard</button>
+            <button class="cat-tab" data-target="tab-products">📦 Products & Units</button>
+            <button class="cat-tab" data-target="tab-pricelists">🏷️ Pricelist Rules</button>
+            <button class="cat-tab" data-target="tab-dispatch">🚚 Dispatch & Returns</button>
+            <button class="cat-tab" data-target="tab-invoices">🧾 Invoices & Late Fees</button>
+            <button class="cat-tab" data-target="tab-reports">📈 Reports & Exports</button>
+            <button class="cat-tab" data-target="tab-settings">⚙️ Settings & AI Policy</button>
+        </div>
+
+        <!-- ===================================================================
+             TAB 1: OPERATIONAL DASHBOARD
+             =================================================================== -->
+        <section id="tab-dashboard" class="admin-tab-pane">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; text-align: left;">
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pickups Scheduled Today</span>
+                    <strong style="font-size: 2.2rem; color: #fff; margin: 4px 0;" id="kpi-pickups">3 Units</strong>
+                    <span style="font-size: 0.78rem; color: var(--accent-emerald);">Warehouse stage: Ready</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Returns Due in N Days</span>
+                    <strong style="font-size: 2.2rem; color: var(--accent-gold); margin: 4px 0;" id="kpi-returns-due">2 Units</strong>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">Alerts dispatched via cron</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Overdue Alerts</span>
+                    <strong style="font-size: 2.2rem; color: #ef4444; margin: 4px 0;" id="kpi-overdue">1 Alert</strong>
+                    <span style="font-size: 0.78rem; color: #ef4444;">Automatic late fee accruing</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Gross Rental Revenue</span>
+                    <strong style="font-size: 2.2rem; color: var(--accent-emerald); margin: 4px 0;" id="kpi-revenue">₹1,58,760</strong>
+                    <span style="font-size: 0.78rem; color: #10b981;">Including deposits & fees</span>
+                </div>
+            </div>
+
+            <!-- Active Fleet Live Ledger Table -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; text-align: left;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800;">Active Orders & State Matrix</h3>
+                    <span class="product-category-badge">LIVE LEDGER</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-muted);">
+                                <th style="padding: 10px;">Order ID</th>
+                                <th style="padding: 10px;">Customer</th>
+                                <th style="padding: 10px;">Equipment</th>
+                                <th style="padding: 10px;">Schedule</th>
+                                <th style="padding: 10px;">Order Status</th>
+                                <th style="padding: 10px;">Stock Status</th>
+                                <th style="padding: 10px;">Invoice Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 2: PRODUCTS & RENTAL UNITS CONFIGURATION
+             =================================================================== -->
+        <section id="tab-products" class="admin-tab-pane" style="display: none;">
+            <!-- Product Creation Form -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; text-align: left; margin-bottom: 2.5rem;">
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Configure Rentable Product</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">Define multi-unit rates (Hour/Day/Week/Month), physical stock count, and late return penalty formula.</p>
+
+                <form id="form-create-product">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">PRODUCT NAME</label>
+                            <input type="text" id="prod-name" class="form-input" placeholder="e.g. Expedition Arctic 4-Season Yurt" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">CATEGORY</label>
+                            <select id="prod-category" class="form-input">
+                                <option value="Tents & Glamping">Tents & Glamping</option>
+                                <option value="Cinema & Video">Cinema & Video</option>
+                                <option value="Water Sports">Water Sports</option>
+                                <option value="Wellness & Spa">Wellness & Spa</option>
+                                <option value="Outdoor Cooking">Outdoor Cooking</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">PHYSICAL STOCK UNITS</label>
+                            <input type="number" id="prod-stock" class="form-input" placeholder="5" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px;">
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">HOURLY RATE (₹)</label>
+                            <input type="number" id="prod-rate-hr" class="form-input" placeholder="₹400">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">DAILY RATE (₹)</label>
+                            <input type="number" id="prod-rate-day" class="form-input" placeholder="₹3,500" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">WEEKLY RATE (₹)</label>
+                            <input type="number" id="prod-rate-wk" class="form-input" placeholder="₹18,000">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">SECURITY DEPOSIT (₹)</label>
+                            <input type="number" id="prod-deposit" class="form-input" placeholder="₹2,500" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 16px;">
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">LATE PENALTY FORMULA</label>
+                            <input type="text" id="prod-late-formula" class="form-input" value="15% of daily rate per day">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">MAINTENANCE BUFFER</label>
+                            <input type="number" id="prod-buffer" class="form-input" value="4" placeholder="Hours">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">Add Rentable Product to Fleet +</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 3: PRICELISTS & RULE ENGINE
+             =================================================================== -->
+        <section id="tab-pricelists" class="admin-tab-pane" style="display: none;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; text-align: left;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800;">Customer Segment & Time-Dependent Pricelists</h3>
+                        <p style="color: var(--text-muted); font-size: 0.88rem;">Configure tiered discount rates for Corporate, VIP, and Seasonal campaigns.</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;" id="pricelists-container">
+                    <!-- Populated dynamically from /api/pricelists -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 4: DISPATCH & HANDOVER (PICKUP & RETURN DOCUMENTS)
+             =================================================================== -->
+        <section id="tab-dispatch" class="admin-tab-pane" style="display: none;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left;">
+                <!-- Pickup Document Card -->
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="product-category-badge" style="background: rgba(59,130,246,0.15); color: #3b82f6;">STAGE 2: PICKUP</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Doc ID: DOC-PK-71934</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Pickup Handover Document</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Perform pre-pickup condition inspection and transfer stock to customer.</p>
+
+                    <div style="background: var(--bg-card); padding: 14px; border-radius: var(--radius-sm); font-size: 0.88rem; margin-bottom: 16px;">
+                        <div>Order: <strong>ORD-71934 (Maya Sharma)</strong></div>
+                        <div>Item: <strong>Twin Cedar Lakeside Canoes Package</strong></div>
+                        <div>Serial Unit: <strong>#CDR-092 / #CDR-093</strong></div>
+                        <div style="color: var(--accent-gold); margin-top: 4px;">Status: CONFIRMED (RESERVED)</div>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label style="font-size: 0.8rem; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" checked style="accent-color: var(--accent-emerald);">
+                            Pre-pickup condition verified & clean photos logged
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%;" onclick="confirmPickupHandover('ORD-71934')">
+                        Confirm Pickup & Set Status: "WITH_CUSTOMER" →
+                    </button>
+                </div>
+
+                <!-- Return Document Card -->
+                <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="product-category-badge" style="background: rgba(16,185,129,0.15); color: #10b981;">STAGE 3: RETURN</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Doc ID: DOC-RT-94821</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Return Collection & Restock</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Verify returned condition, settle remaining invoice, and release deposit.</p>
+
+                    <div style="background: var(--bg-card); padding: 14px; border-radius: var(--radius-sm); font-size: 0.88rem; margin-bottom: 16px;">
+                        <div>Order: <strong>ORD-94821 (Alex Rivera)</strong></div>
+                        <div>Item: <strong>Luxury 4-Person Glamping Canvas Yurt</strong></div>
+                        <div>Deposit Held: <strong>₹3,000</strong> | Pending Balance: <strong>₹12,960</strong></div>
+                        <div style="color: #3b82f6; margin-top: 4px;">Current Status: WITH_CUSTOMER</div>
+                    </div>
+
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="location.href='returns.html'">
+                        Open Return Inspection Tool →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 5: INVOICES & AUTOMATIC LATE FEES
+             =================================================================== -->
+        <section id="tab-invoices" class="admin-tab-pane" style="display: none;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; text-align: left;">
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Invoice & Settlement Manager</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">Track upfront paid invoices, pending balances, and automatic late return fee amendments.</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <!-- Invoice 1 -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.4rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>INV-94821</strong>
+                            <span class="product-category-badge" style="background: rgba(243,208,104,0.15); color: var(--accent-gold);">BALANCE PENDING</span>
+                        </div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: #fff; margin: 10px 0 4px;">₹12,960 Balance</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Customer: Alex Rivera • Partial Deposit ₹3,000 Paid</div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 14px; font-size: 0.8rem;" onclick="alert('Settling Balance against Razorpay Sandbox...')">Settle Balance</button>
+                    </div>
+
+                    <!-- Invoice 2 -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.4rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <strong>INV-71934</strong>
+                            <span class="product-category-badge" style="background: rgba(16,185,129,0.15); color: #10b981;">PAID IN FULL</span>
+                        </div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: #fff; margin: 10px 0 4px;">₹15,200 Total</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Customer: Maya Sharma • 100% Upfront Settled</div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 14px; font-size: 0.8rem;" onclick="alert('Receipt PDF downloaded!')">Download Tax Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 6: REPORTS & EXPORTS
+             =================================================================== -->
+        <section id="tab-reports" class="admin-tab-pane" style="display: none;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; text-align: left;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800;">Analytics & Multi-Format Exports</h3>
+                        <p style="color: var(--text-muted); font-size: 0.88rem;">Stream period-based reports in PDF, XLSX, and CSV formats.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="/api/admin/reports/export-csv" class="btn btn-secondary">Download CSV</a>
+                        <button class="btn btn-primary" onclick="alert('Streaming compiled PDF statement...')">Download PDF Statement</button>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <!-- Most Rented Products -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem;">
+                        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: #fff;">Most Rented Products (Utilization %)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem;">
+                            <div style="display: flex; justify-content: space-between;"><span>Luxury 4-Person Canvas Yurt</span><strong style="color: var(--accent-emerald);">92%</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Pro Cinema Camera Rig</span><strong style="color: var(--accent-emerald);">86%</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Twin Cedar Lakeside Canoes</span><strong style="color: var(--accent-emerald);">74%</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Top Customers -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem;">
+                        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: #fff;">Top Customers (Spend & Volume)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem;">
+                            <div style="display: flex; justify-content: space-between;"><span>Alex Rivera (VIP)</span><strong>₹48,500 (4 bookings)</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Maya Sharma (Corporate)</span><strong>₹34,200 (3 bookings)</strong></div>
+                            <div style="display: flex; justify-content: space-between;"><span>Kavita Rao (Standard)</span><strong>₹22,900 (2 bookings)</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 7: SETTINGS & RAG KNOWLEDGE BASE
+             =================================================================== -->
+        <section id="tab-settings" class="admin-tab-pane" style="display: none;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; text-align: left;">
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Notification & AI Knowledge Settings</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem;">Configure the background cron lead time and upload policy rules for the Conversational Rental Assistant.</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">PRE-RETURN ALERT LEAD TIME (N DAYS)</label>
+                        <input type="number" id="setting-lead-time" class="form-input" value="2" min="1" max="7">
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Triggers background email/portal alerts to customer & staff N days before scheduled return.</span>
+
+                        <button class="btn btn-primary" style="margin-top: 14px;" onclick="saveSettings()">Save Configuration</button>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">AI RAG POLICY KNOWLEDGE BASE</label>
+                        <textarea class="form-input" style="height: 100px; resize: none; font-size: 0.82rem;" readonly>
+Rental Policy Rules active in Vector Index:
+- Security deposit refund within 60 minutes of clean return.
+- 2-hour grace period for returns with zero penalty fee.
+- Overdue penalty rate: 15% of daily rate per 24 hours late.
+                        </textarea>
+                        <button class="btn btn-secondary" style="margin-top: 8px;" onclick="alert('RAG Index refreshed!')">Re-Index Knowledge Base</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="luxe-footer">
+        <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border-top: none;">
+            <span>© 2026 EscapeLuxe Admin Operations Console. All rights reserved.</span>
+            <span>Master Architecture Implementation</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.cat-tab[data-target]');
+            const panes = document.querySelectorAll('.admin-tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    panes.forEach(p => p.style.display = 'none');
+                    tab.classList.add('active');
+                    const target = document.getElementById(tab.getAttribute('data-target'));
+                    if (target) target.style.display = 'block';
+                });
+            });
+
+            // Load live orders and reports
+            loadAdminData();
+
+            // Form add product
+            const prodForm = document.getElementById('form-create-product');
+            prodForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const body = {
+                    name: document.getElementById('prod-name').value,
+                    category: document.getElementById('prod-category').value,
+                    stockCount: document.getElementById('prod-stock').value,
+                    hourlyRate: document.getElementById('prod-rate-hr').value || 400,
+                    dailyRate: document.getElementById('prod-rate-day').value,
+                    weeklyRate: document.getElementById('prod-rate-wk').value || 20000,
+                    securityDeposit: document.getElementById('prod-deposit').value,
+                    lateFeeFormula: document.getElementById('prod-late-formula').value
+                };
+
+                const res = await fetch('/api/admin/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                if (res.ok) {
+                    alert("✓ Rentable Product created with units and stock locked in catalog!");
+                    prodForm.reset();
+                    loadAdminData();
+                }
+            });
+
+            // Cron trigger
+            document.getElementById('btn-trigger-cron').addEventListener('click', async () => {
+                const res = await fetch('/api/cron/check-notifications');
+                const data = await res.json();
+                alert(`⚡ Cron Scan Complete!\n\nLead Time: ${data.leadTimeDaysConfigured} Days\nOrders Scanned: ${data.scannedOrdersCount}\nAlerts Dispatched: ${data.notificationsTriggeredCount}\n\nCheck customer and staff notification boxes.`);
+                loadAdminData();
+            });
+        });
+
+        async function loadAdminData() {
+            try {
+                const repRes = await fetch('/api/admin/reports');
+                const rep = await repRes.json();
+
+                document.getElementById('kpi-pickups').innerText = `${rep.kpis.pickupsToday} Units`;
+                document.getElementById('kpi-returns-due').innerText = `${rep.kpis.returnsDueNextNDays} Units`;
+                document.getElementById('kpi-overdue').innerText = `${rep.kpis.overdueAlertsCount} Alert`;
+                document.getElementById('kpi-revenue').innerText = `₹${rep.kpis.totalRevenue.toLocaleString()}`;
+
+                const tbody = document.getElementById('admin-orders-table-body');
+                tbody.innerHTML = rep.orders.map(o => `
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--accent-emerald);">${o.id}</td>
+                        <td style="padding: 10px;">${o.customerName}</td>
+                        <td style="padding: 10px;">${o.productName}</td>
+                        <td style="padding: 10px; font-size: 0.8rem; color: var(--text-muted);">${o.startDate.split('T')[0]} → ${o.endDate.split('T')[0]}</td>
+                        <td style="padding: 10px;"><span class="product-category-badge">${o.orderStatus}</span></td>
+                        <td style="padding: 10px; font-weight: 600;">${o.stockStatus}</td>
+                        <td style="padding: 10px; color: ${o.invoiceStatus === 'PAID_FULL' ? '#10b981' : 'var(--accent-gold)'}; font-weight: 700;">${o.invoiceStatus}</td>
+                    </tr>
+                `).join('');
+
+                // Load pricelists
+                const plRes = await fetch('/api/pricelists');
+                const pls = await plRes.json();
+                const plContainer = document.getElementById('pricelists-container');
+                plContainer.innerHTML = pls.map(pl => `
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.4rem;">
+                        <span class="product-category-badge" style="font-size: 0.72rem;">${pl.segment}</span>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 8px 0 4px;">${pl.name}</h4>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--accent-emerald); margin-bottom: 8px;">${pl.discountPercent}% Discount</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">Rate Multiplier: ${pl.hourlyRateMultiplier}x</div>
+                        <div style="font-size: 0.78rem; color: var(--accent-gold); margin-top: 6px;">Validity: ${pl.validity}</div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function confirmPickupHandover(orderId) {
+            const res = await fetch(`/api/orders/${orderId}/pickup-handover`, { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                alert(`✓ Stage 2 Complete: ${data.message}`);
+                loadAdminData();
+            }
+        }
+
+        async function saveSettings() {
+            const days = parseInt(document.getElementById('setting-lead-time').value, 10);
+            await fetch('/api/admin/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ notificationLeadTimeDays: days })
+            });
+            alert(`✓ Notification lead time set to ${days} days!`);
+        }
+    </script>
+</body>
+</html>

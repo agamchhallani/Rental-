@@ -1,0 +1,104 @@
+// Phase 1: Foundation & Authentication Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------------------
+// USER ROLES & AUTHENTICATION
+// -----------------------------------------------------------------------------
+enum Role {
+  CUSTOMER
+  ADMIN
+  END_USER
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          Role      @default(CUSTOMER)
+  phone         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  orders        Order[]
+}
+
+// -----------------------------------------------------------------------------
+// PRODUCT & PRICELIST MANAGEMENT (Phase 2 & 3 Support)
+// -----------------------------------------------------------------------------
+model Product {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  category      String
+  imageUrl      String?
+  stockCount    Int       @default(0)
+  
+  basePrice     Float     // Default daily rate
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  pricingRules  PricingRule[]
+  orderItems    OrderItem[]
+}
+
+// Logic to handle time-dependent pricing, discount rules, and validity periods
+model PricingRule {
+  id            String    @id @default(uuid())
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  
+  type          String    // e.g., "HOURLY", "DAILY", "SEASONAL", "LATE_FEE"
+  price         Float
+  validFrom     DateTime?
+  validUntil    DateTime?
+}
+
+// -----------------------------------------------------------------------------
+// ORDERS, QUOTATIONS & RESERVATIONS (Phase 3 & 4 Support)
+// -----------------------------------------------------------------------------
+enum OrderStatus {
+  QUOTATION
+  RESERVED
+  ACTIVE
+  RETURNED
+  OVERDUE
+}
+
+model Order {
+  id            String    @id @default(uuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  
+  status        OrderStatus @default(QUOTATION)
+  totalAmount   Float
+  depositPaid   Float     @default(0)
+  
+  startDate     DateTime
+  endDate       DateTime
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id            String    @id @default(uuid())
+  orderId       String
+  order         Order     @relation(fields: [orderId], references: [id])
+  
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  
+  quantity      Int
+  priceLockedAt Float
+}

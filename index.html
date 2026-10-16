@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentFlow • White & Golden Edition (21st.dev)</title>
+    <meta name="description" content="A luxury AI-driven rental platform with dynamic pricing, seamless invoicing, and instant OTP verification in a white and golden theme.">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 21st.dev Luxury Glass Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"></div>
+            <h1>RentFlow <span>LUXE</span></h1>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn btn-secondary theme-btn" aria-label="Toggle Theme" title="Toggle Theme">☀️</button>
+            <button class="btn btn-primary" id="navbar-login-btn">Log in</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 21st.dev Spotlight & Golden Glow -->
+    <main id="home" class="hero-section">
+        <div class="hero-background">
+            <div class="gradient-blob one"></div>
+            <div class="gradient-blob two"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                <span>21st.dev Curated Architecture</span>
+                <span class="badge-tag">White & Gold</span>
+            </div>
+            
+            <h1 class="hero-title">Rent Everything, <br><span class="gold-gradient-text">Track Anywhere.</span></h1>
+            
+            <p class="hero-subtitle">
+                Experience the premier luxury rental ecosystem. Powered by AI asset discovery, dynamic pricing curves, and secure OTP verification.
+            </p>
+            
+            <!-- AI Spotlight Search Bar -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <span class="search-icon">✨</span>
+                    <input type="text" id="ai-search" placeholder="Ask AI: 'I need a professional 4K camera for 3 days under ₹10,000'..." autocomplete="off">
+                    <button class="btn btn-primary" id="search-btn">
+                        <span>Find Rentals</span>
+                        <span>→</span>
+                    </button>
+                </div>
+                
+                <div class="search-chips">
+                    <span class="search-chips-label">Trending Searches:</span>
+                    <span class="chip" data-query="camera">📸 Pro Camera Kit</span>
+                    <span class="chip" data-query="camping">🏕️ Camping Gear</span>
+                    <span class="chip" data-query="bike">🚴 Mountain Bike</span>
+                    <span class="chip" data-query="drone">⚡ 4K Drone</span>
+                </div>
+            </div>
+            
+            <!-- 21st.dev Bento Counter Bar -->
+            <div class="quick-stats">
+                <div class="stat">
+                    <strong>15k+</strong>
+                    <span>Verified Assets</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <strong>24/7</strong>
+                    <span>AI Concierge</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <strong>₹1.4 Cr+</strong>
+                    <span>Rentals Managed</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <strong>100%</strong>
+                    <span>Damage Insured</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 21st.dev Bento Grid Feature Section -->
+    <section class="bento-section">
+        <div class="section-header">
+            <span class="section-tag">21st.dev Bento Grid</span>
+            <h2 class="section-title">Engineered For Modern Rentals</h2>
+            <p class="section-subtitle">A unified platform designed for discerning renters and high-volume asset owners.</p>
+        </div>
+
+        <div class="bento-grid">
+            <!-- Card 1: Dynamic Pricing Calculator (Interactive 2-column card) -->
+            <div class="bento-card col-span-2">
+                <div class="bento-icon">⚡</div>
+                <h3 class="bento-title">Smart AI Dynamic Pricelists</h3>
+                <p class="bento-desc">
+                    Automatic tier discounts adjust pricing dynamically based on rental duration, real-time demand, and renter trust score.
+                </p>
+                <div class="bento-widget">
+                    <div class="calc-slider-wrapper">
+                        <div class="calc-header">
+                            <span>Rental Duration: <strong id="duration-val">3 Days</strong></span>
+                            <span class="calc-badge" id="discount-badge">10% Dynamic Discount</span>
+                        </div>
+                        <input type="range" id="bento-slider" class="calc-slider" min="1" max="30" value="3">
+                        <div class="calc-result">
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Estimated Daily Rate for Pro Kit:</span>
+                            <strong id="calc-price-display">₹3,150 / day <span style="font-size: 0.75rem; text-decoration: line-through; color: var(--text-dim);">₹3,500</span></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Instant OTP Authentication -->
+            <div class="bento-card">
+                <div class="bento-icon">🛡️</div>
+                <h3 class="bento-title">One-Tap OTP Security</h3>
+                <p class="bento-desc">
+                    Passwordless logins using verified SMS/Email OTP codes with frictionless dual-role verification.
+                </p>
+                <div style="margin-top: auto;">
+                    <button class="btn btn-secondary" style="width: 100%;" id="bento-test-auth">Try Instant Log in</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Dual Role Architecture -->
+            <div class="bento-card">
+                <div class="bento-icon">🔄</div>
+                <h3 class="bento-title">Multi-Role Portal</h3>
+                <p class="bento-desc">
+                    Switch between Renter and Seller in a single tap. List equipment, monitor returns, and track settlements.
+                </p>
+                <div style="margin-top: auto;">
+                    <a href="dashboard.html" class="btn btn-secondary" style="width: 100%;">View Dashboard</a>
+                </div>
+            </div>
+
+            <!-- Card 4: AI Matching (2-column card) -->
+            <div class="bento-card col-span-2">
+                <div class="bento-icon">✨</div>
+                <h3 class="bento-title">Contextual AI Search & Recommendations</h3>
+                <p class="bento-desc">
+                    Natural language queries understand your requirements, budget constraints, and dates to recommend the optimal equipment package.
+                </p>
+                <div style="margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="products.html?q=camera" class="btn btn-secondary">Explore Cameras →</a>
+                    <a href="products.html?q=camping" class="btn btn-secondary">Explore Outdoor →</a>
+                    <a href="products.html" class="btn btn-primary">Browse All Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Inventory Showcase -->
+    <section class="products-preview-section">
+        <div class="section-header">
+            <span class="section-tag">Curated Collection</span>
+            <h2 class="section-title">Popular Luxury Rentals</h2>
+            <p class="section-subtitle">Top-rated items ready for instant booking with zero security deposit.</p>
+        </div>
+
+        <div class="category-pills">
+            <button class="cat-pill active" data-cat="all">All Items</button>
+            <button class="cat-pill" data-cat="electronics">Electronics</button>
+            <button class="cat-pill" data-cat="outdoors">Outdoors</button>
+            <button class="cat-pill" data-cat="sports">Sports & Mobility</button>
+        </div>
+
+        <div class="products-grid" id="homepage-featured-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card" data-category="electronics">
+                <div class="card-top">
+                    <span class="product-tag">Cinema Series</span>
+                    <span class="stock-status">5 In Stock</span>
+                </div>
+                <div class="card-icon">📸</div>
+                <div class="product-info">
+                    <h3>Pro Camera Kit</h3>
+                    <p>Sony FX3 Full-Frame Cinema Line with 24-70mm f/2.8 GM Lens & audio handle.</p>
+                </div>
+                <div class="card-bottom">
+                    <div class="price-box">
+                        <span class="price-val">₹3,500</span>
+                        <span class="price-sub">per day</span>
+                    </div>
+                    <a href="products.html?q=camera" class="btn btn-primary" style="padding: 0.5rem 1rem;">Rent Now</a>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card" data-category="outdoors">
+                <div class="card-top">
+                    <span class="product-tag">Adventure Pack</span>
+                    <span class="stock-status">10 In Stock</span>
+                </div>
+                <div class="card-icon">🏕️</div>
+                <div class="product-info">
+                    <h3>Camping Gear Set</h3>
+                    <p>4-person waterproof dome tent, dual sleeping bags, portable stove, and power station.</p>
+                </div>
+                <div class="card-bottom">
+                    <div class="price-box">
+                        <span class="price-val">₹2,500</span>
+                        <span class="price-sub">per day</span>
+                    </div>
+                    <a href="products.html?q=camping" class="btn btn-primary" style="padding: 0.5rem 1rem;">Rent Now</a>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card" data-category="sports">
+                <div class="card-top">
+                    <span class="product-tag">Trail Edition</span>
+                    <span class="stock-status">3 In Stock</span>
+                </div>
+                <div class="card-icon">🚴</div>
+                <div class="product-info">
+                    <h3>Mountain Bike Pro</h3>
+                    <p>Full-suspension carbon alloy frame with hydraulic disc brakes and trail helmet.</p>
+                </div>
+                <div class="card-bottom">
+                    <div class="price-box">
+                        <span class="price-val">₹1,800</span>
+                        <span class="price-sub">per day</span>
+                    </div>
+                    <a href="products.html?q=bike" class="btn btn-primary" style="padding: 0.5rem 1rem;">Rent Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h2>RentFlow</h2>
+                </div>
+                <p>The premium peer-to-peer and enterprise rental network. Engineered with 21st.dev components in an opulent white & gold design system.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">All Catalog</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                    <li><a href="dashboard.html">Client Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Creator Gear</a></li>
+                    <li><a href="#">Outdoor & Expeditions</a></li>
+                    <li><a href="#">Enterprise Fleets</a></li>
+                    <li><a href="#">Event AV Logistics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust & Safety</h4>
+                <ul>
+                    <li><a href="#">Damage Coverage</a></li>
+                    <li><a href="#">OTP Verification</a></li>
+                    <li><a href="#">Rental Agreement</a></li>
+                    <li><a href="#">24/7 AI Concierge</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 RentFlow Technologies Inc. All rights reserved.</span>
+            <span>Crafted with 21st.dev White & Golden Architecture</span>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

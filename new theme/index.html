@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EscapeLuxe • Unified Master Rental Management Platform</title>
+    <meta name="description" content="End-to-end luxury outdoor rental management: AI matching, dynamic pricelists, digital e-sign contracts, pickup dispatch, pre-return cron notifications, return inspection, and CSV financial reports.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="luxe-nav">
+        <a href="#hero-section" class="luxe-logo">
+            <span class="logo-badge">21ST.DEV</span>
+            EscapeLuxe
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="#hero-section" class="active">Showcase</a></li>
+            <li><a href="#phase-1">Phase 1: Setup</a></li>
+            <li><a href="#phase-2">Phase 2: Catalog</a></li>
+            <li><a href="#phase-3">Phase 3: Checkout</a></li>
+            <li><a href="#phase-4">Phase 4: Dispatch</a></li>
+            <li><a href="#phase-5">Phase 5: Returns</a></li>
+            <li><a href="#phase-6">Phase 6: Reports</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="btn btn-secondary" id="nav-cart-btn">
+                🛒 Cart (<span class="cart-count-badge">0</span>)
+            </button>
+            <div class="user-nav-slot">
+                <button class="btn btn-primary open-login-btn">Log in</button>
+            </div>
+            <a href="../index.html" class="btn-switch-theme" title="Switch back to original White and Gold theme">
+                <span>✦</span>
+                <span>White & Gold Theme</span>
+                <span>→</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Sticky Master Phase Stepper (Roadmap Pipeline Navigation) -->
+    <div class="phase-stepper-wrap">
+        <div class="phase-stepper">
+            <a href="#hero-section" class="phase-step-pill active">
+                <span class="step-num">✦</span>
+                <span>Showcase</span>
+            </a>
+            <a href="#phase-1" class="phase-step-pill">
+                <span class="step-num">1</span>
+                <span>Units & Pricelists</span>
+            </a>
+            <a href="#phase-2" class="phase-step-pill">
+                <span class="step-num">2</span>
+                <span>AI Catalog & Search</span>
+            </a>
+            <a href="#phase-3" class="phase-step-pill">
+                <span class="step-num">3</span>
+                <span>E-Sign & Invoicing</span>
+            </a>
+            <a href="#phase-4" class="phase-step-pill">
+                <span class="step-num">4</span>
+                <span>Dispatch & Cron Hub</span>
+            </a>
+            <a href="#phase-5" class="phase-step-pill">
+                <span class="step-num">5</span>
+                <span>Inspection & Late Fees</span>
+            </a>
+            <a href="#phase-6" class="phase-step-pill">
+                <span class="step-num">6</span>
+                <span>Ledger & CSV Export</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         SECTION 0: 21ST.DEV HERO & EXPANDING SELECTOR SHOWCASE
+         ========================================================================= -->
+    <main class="hero-wrapper" id="hero-section">
+        <div class="header-section">
+            <div class="header-badge animate-fadeInTop">
+                <span>✦</span>
+                <span>21st.dev Component Architecture • Unified Platform</span>
+            </div>
+            <h1 class="header-title animate-fadeInTop delay-300">Escape in Style</h1>
+            <p class="header-desc animate-fadeInTop delay-600">
+                All 6 roadmap phases unified into one seamless workflow: from product unit configuration to AI catalog discovery, digital contract e-signing, automated pre-return cron notifications, and verified deposit returns.
+            </p>
+        </div>
+
+        <!-- 21st.dev Interactive Expanding Options Container -->
+        <div class="options-container" id="hero-options-gallery">
+            <!-- Option 0: Luxury Tent -->
+            <div class="option active slide-out" style="background-image: url('https://cdn.21st.dev/assets/mirror/31/31ee902b46038d690f949a8be82c4b5673d554eac7456974c04950d78b4efe3d.jpg');">
+                <div class="option-shadow"></div>
+                <div class="option-label">
+                    <div class="option-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 576 512" fill="currentColor">
+                            <path d="M288 0c-9.6 0-18.7 4.3-24.8 11.7L3.6 303.4C-2.4 310.8-1 321.7 6.4 327.7s18.3 4.6 24.3-2.8L288 47.9l257.3 277c6 7.4 16.9 8.8 24.3 2.8s8.8-16.9 2.8-24.3L312.8 11.7C306.7 4.3 297.6 0 288 0zM176 256c0-26.5-21.5-48-48-48S80 229.5 80 256v192c0 35.3 28.7 64 64 64h288c35.3 0 64-28.7 64-64V256c0-26.5-21.5-48-48-48s-48 21.5-48 48v160H176V256zM288 384c26.5 0 48 21.5 48 48v80h-96v-80c0-26.5 21.5-48 48-48z"/>
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <div class="option-title">Luxury Tent</div>
+                        <div class="option-desc">Cozy glamping under the stars</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 1: Campfire Feast -->
+            <div class="option inactive slide-out" style="background-image: url('https://cdn.21st.dev/assets/mirror/3b/3b6c78ba5a375a240a6452b7c68a889228d52aba6e18e355b77f04472e4e0e76.jpg');">
+                <div class="option-shadow"></div>
+                <div class="option-label">
+                    <div class="option-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 384 512" fill="currentColor">
+                            <path d="M192 0c-41.8 0-77.4 26.7-90.5 64.9C68.6 157.9 32 231.4 32 320c0 88.4 71.6 160 160 160s160-71.6 160-160c0-88.6-36.6-162.1-69.5-255.1C269.4 26.7 233.8 0 192 0zm0 432c-61.9 0-112-50.1-112-112 0-58.4 27.6-118.8 54.4-192 11.9 31.9 32 64 57.6 64 35.3 0 64-28.7 64-64 0-11.2-3.1-21.7-8.4-30.8C265.8 159.2 288 209.6 288 320c0 61.9-50.1 112-112 112z"/>
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <div class="option-title">Campfire Feast</div>
+                        <div class="option-desc">Gourmet s'mores & stories</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 2: Lakeside Retreat -->
+            <div class="option inactive slide-out" style="background-image: url('https://cdn.21st.dev/assets/mirror/97/97103cb7b8ac5adbbd3e64c7410560b04a83b056daa580ee1b0353f774ec8d3d.jpg');">
+                <div class="option-shadow"></div>
+                <div class="option-label">
+                    <div class="option-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 384 512" fill="currentColor">
+                            <path d="M192 0C102.5 137.2 32 249.2 32 352c0 88.4 71.6 160 160 160s160-71.6 160-160c0-102.8-70.5-214.8-160-352zm0 448c-53 0-96-43-96-96 0-17.7 14.3-32 32-32s32 14.3 32 32c0 17.7 14.3 32 32 32 17.7 0 32 14.3 32 32s-14.3 32-32 32z"/>
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <div class="option-title">Lakeside Retreat</div>
+                        <div class="option-desc">Private dock & canoe rides</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 3: Mountain Spa -->
+            <div class="option inactive slide-out" style="background-image: url('https://cdn.21st.dev/assets/mirror/9f/9fff1299ab7c6ec1a4b42e57e2ec6853fee03efe144bb054a494ec9c1e145d23.jpg');">
+                <div class="option-shadow"></div>
+                <div class="option-label">
+                    <div class="option-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 576 512" fill="currentColor">
+                            <path d="M112 0c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V16c0-8.8 7.2-16 16-16zm96 32c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16zm96-16c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V16c0-8.8 7.2-16 16-16zm96 32c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16zM0 256c0-35.3 28.7-64 64-64h448c35.3 0 64 28.7 64 64v192c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256zm64 64v128h448V320H64z"/>
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <div class="option-title">Mountain Spa</div>
+                        <div class="option-desc">Outdoor sauna & hot tub</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 4: Guided Adventure -->
+            <div class="option inactive slide-out" style="background-image: url('https://cdn.21st.dev/assets/mirror/9f/9f4d6686c3ee21321e110920cfd3b8109d15f61ab2972dfafdeb1f1b1099c568.jpg');">
+                <div class="option-shadow"></div>
+                <div class="option-label">
+                    <div class="option-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 448 512" fill="currentColor">
+                            <path d="M224 0c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm183.5 281.3l-45.7-18.3-43.4-95.5C310.2 149.7 292.6 137 273.2 137H207c-21.7 0-41.2 14.8-46.7 35.7L128 300.9l-49.8-19.9c-8.2-3.3-17.5 1-20.8 9.2s1 17.5 9.2 20.8l64 25.6c4.6 1.8 9.7 1.8 14.3-.2l48-21.3 23.3 93.3c3.5 14 16.1 23.7 30.6 23.7h8c11.3 0 21.6-6.3 26.8-16.3l48-93.3 38.6 15.4c8.2 3.3 17.5-1 20.8-9.2s-1-17.5-9.2-20.8z"/>
+                        </svg>
+                    </div>
+                    <div class="option-info">
+                        <div class="option-title">Guided Adventure</div>
+                        <div class="option-desc">Expert-led nature tours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Experience Detail Bar -->
+        <div class="experience-detail-card">
+            <div class="detail-left">
+                <span class="detail-tag" id="detail-tag">TENTS & GLAMPING</span>
+                <h2 class="detail-name" id="detail-name">Luxury Glamping Canvas Yurt</h2>
+                <p class="detail-summary" id="detail-summary">
+                    All-weather double-layer canvas tent with heated memory-foam mattress and stargazing skylight dome.
+                </p>
+            </div>
+            <div class="detail-right">
+                <div class="price-box">
+                    <span class="price-amount" id="detail-price">₹4,800</span>
+                    <span class="price-period">per day (Instant quotation available)</span>
+                </div>
+                <a href="#phase-3" class="btn-primary" id="btn-hero-reserve" style="padding: 14px 28px; font-size: 1rem; text-decoration: none;">
+                    Instant Quotation & Book →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI NLP Discovery Bar -->
+    <section class="ai-search-section">
+        <div class="search-bar-wrap">
+            <span style="font-size: 1.2rem;">✨</span>
+            <input type="text" id="unified-ai-search" placeholder="AI Rental Assistant: e.g. 'I need a 4-person tent and cooking kit for a 3-day weekend under ₹10,000'..." autocomplete="off">
+            <a href="#phase-2" class="btn btn-primary">Find Gear →</a>
+        </div>
+        <div class="search-chips">
+            <span style="color: var(--text-dim); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Trending:</span>
+            <span class="chip" onclick="filterCatalogByQuery('tent')">🏕️ Canvas Yurt</span>
+            <span class="chip" onclick="filterCatalogByQuery('cooking')">🔥 Campfire Cookware</span>
+            <span class="chip" onclick="filterCatalogByQuery('canoes')">🛶 Cedar Canoes</span>
+            <span class="chip" onclick="filterCatalogByQuery('sauna')">🧖 Mountain Sauna</span>
+            <span class="chip" onclick="filterCatalogByQuery('drone')">⚡ 4K Cinema Drone</span>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 1: PRODUCT & INVENTORY SETUP + DYNAMIC PRICELISTS
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-1">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 1 Architecture</span>
+                    <h2>Product Units & Dynamic Pricelist Engine</h2>
+                    <p>Configure rentable assets across multiple time units (Hourly, Daily, Weekly, Monthly), set buffer hours, and simulate automated tiered duration discount rules.</p>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary" onclick="openAddProductModal()">+ Configure Product</button>
+                    <span class="badge-status confirmed" style="align-self: center;">API: /api/products</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Pricelist Duration Calculator Tool -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Dynamic Tiered Discount Simulator</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">Adjust the duration slider to witness automatic tier discount rules apply in real time.</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <span class="badge-status" style="background: rgba(16,185,129,0.15); color: #10b981;">3+ Days: 10% OFF</span>
+                        <span class="badge-status" style="background: rgba(243,208,104,0.15); color: #f3d068;">7+ Days: 18% OFF</span>
+                        <span class="badge-status" style="background: rgba(168,85,247,0.15); color: #c084fc;">30+ Days: 25% OFF</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <label style="font-size: 0.85rem; font-weight: 700; color: var(--text-white);">Rental Duration:</label>
+                            <span style="font-size: 1.1rem; font-weight: 800; color: var(--accent-emerald);" id="sim-duration-display">3 Days</span>
+                        </div>
+                        <input type="range" id="sim-duration-slider" min="1" max="45" value="3" style="width: 100%; accent-color: var(--accent-emerald); cursor: pointer;">
+                        
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); margin-top: 6px;">
+                            <span>1 Day (0%)</span>
+                            <span>3 Days (-10%)</span>
+                            <span>7 Days (-18%)</span>
+                            <span>30+ Days (-25%)</span>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                            <span style="color: var(--text-muted);">Item Selected:</span>
+                            <strong style="color: #fff;" id="sim-item-name">Luxury Glamping Canvas Yurt</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                            <span style="color: var(--text-muted);">Standard Base Rate:</span>
+                            <span id="sim-base-rate">₹14,400 (₹4,800/day)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; color: var(--accent-emerald);">
+                            <span>Tier Duration Savings:</span>
+                            <span id="sim-discount-val">-₹1,440 (10% OFF)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                            <span style="color: var(--text-muted);">Security Deposit:</span>
+                            <span id="sim-deposit-val">₹3,000 (Refundable)</span>
+                        </div>
+                        <div style="border-top: 1px solid var(--border-subtle); padding-top: 8px; margin-top: 6px; display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 800;">
+                            <span style="color: #fff;">Simulated Net Quote:</span>
+                            <span style="color: var(--accent-gold);" id="sim-total-val">₹15,960</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Setup Units Grid -->
+            <div style="margin-top: 1.5rem;">
+                <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #fff;">Rentable Products Multi-Unit Rates</h3>
+                <div class="luxe-table-wrap">
+                    <table class="luxe-table" id="phase1-products-table">
+                        <thead>
+                            <tr>
+                                <th>Product Asset</th>
+                                <th>Category</th>
+                                <th>Hourly Rate</th>
+                                <th>Daily Rate</th>
+                                <th>Weekly Rate</th>
+                                <th>Monthly Rate</th>
+                                <th>Deposit</th>
+                                <th>Stock / Buffer</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="phase1-products-tbody">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 2: DYNAMIC CATALOG & REAL-TIME AVAILABILITY
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-2">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 2 Architecture</span>
+                    <h2>Dynamic Catalog & Real-Time Availability Check</h2>
+                    <p>Filter gear, inspect stock across units, and validate real-time calendar availability including maintenance turnaround buffers.</p>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <span class="badge-status picked-up">Live Stock Locking</span>
+                </div>
+            </div>
+
+            <!-- Real-Time Date & Buffer Availability Validator Bar -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald);">📅 Check Date Availability:</span>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input type="date" id="avail-start-date" class="form-input" style="padding: 6px 12px; font-size: 0.85rem;">
+                        <span style="color: var(--text-dim);">to</span>
+                        <input type="date" id="avail-end-date" class="form-input" style="padding: 6px 12px; font-size: 0.85rem;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn btn-secondary" id="btn-validate-calendar" style="padding: 8px 16px;">Check Availability API</button>
+                    <span id="avail-validation-status" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald);">All 6 Items Available</span>
+                </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="filter-pills-row" style="margin-bottom: 1.5rem;" id="catalog-category-pills">
+                <button class="filter-pill active" onclick="filterCatalogCategory('all', this)">All Equipment</button>
+                <button class="filter-pill" onclick="filterCatalogCategory('Tents & Glamping', this)">🏕️ Glamping & Yurts</button>
+                <button class="filter-pill" onclick="filterCatalogCategory('Outdoor Cooking', this)">🔥 Outdoor Cooking</button>
+                <button class="filter-pill" onclick="filterCatalogCategory('Water Sports', this)">🛶 Cedar Canoes</button>
+                <button class="filter-pill" onclick="filterCatalogCategory('Wellness & Spa', this)">🧖 Alpine Sauna</button>
+                <button class="filter-pill" onclick="filterCatalogCategory('Cinema & Video', this)">🎥 Cinema Rig</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-cards-grid" id="unified-product-grid">
+                <!-- Rendered dynamically via script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 3: QUOTATION, CONTRACT E-SIGN & FLEXIBLE INVOICING CHECKOUT
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-3">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 3 Architecture</span>
+                    <h2>Instant Quotation & Flexible Invoicing Checkout</h2>
+                    <p>Review duration discounts, digitally e-sign the rental agreement on canvas, choose 100% upfront vs partial deposit, and atomically reserve inventory.</p>
+                </div>
+                <div>
+                    <span class="badge-status confirmed">Stock Lock Guaranteed</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; text-align: left;" id="unified-checkout-grid">
+                <!-- Left Column: Form, E-Signature, and Payment Option -->
+                <div>
+                    <!-- 1. Customer Identification -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #fff;">1. Customer Identification</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Full Name</label>
+                                <input type="text" id="unified-chk-name" class="form-input" value="Alex Rivera" required>
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Mobile Phone</label>
+                                <input type="text" id="unified-chk-phone" class="form-input" value="+91 98765 43210" required>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Email for Contract & Invoice</label>
+                            <input type="email" id="unified-chk-email" class="form-input" value="alex@escapeluxe.com" required>
+                        </div>
+                    </div>
+
+                    <!-- 2. Digital Agreement & Canvas E-Signature Pad -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">2. Digital Agreement & E-Signature</h3>
+                            <span class="product-category-badge">E-SIGN REQUIRED</span>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; max-height: 110px; overflow-y: auto; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">
+                            <p><strong>RENTAL ESCROW TERMS & CONDITION (ESC-2026-T1):</strong></p>
+                            <p>1. Equipment must be inspected upon physical handover. Security deposit held in escrow.</p>
+                            <p>2. Pre-return reminder alerts will be automatically dispatched N days before due date.</p>
+                            <p>3. Late return penalty applies at 15% daily rate per overdue day deducted from security deposit.</p>
+                        </div>
+
+                        <!-- Canvas Drawing Signature Pad -->
+                        <div class="signature-pad-wrap">
+                            <canvas id="unified-signature-canvas"></canvas>
+                            <div class="signature-pad-footer">
+                                <span>Draw your signature above using mouse or touch</span>
+                                <button type="button" class="btn btn-secondary" id="btn-clear-signature" style="padding: 2px 8px; font-size: 0.7rem;">Clear Canvas</button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                            <input type="checkbox" id="unified-chk-esign" style="accent-color: var(--accent-emerald);" checked>
+                            <label for="unified-chk-esign" style="font-size: 0.82rem; color: #fff; cursor: pointer;">
+                                I acknowledge that my digital signature legally binds this rental contract agreement.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 3. Flexible Invoicing Selection (Option A vs Option B) -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: #fff;">3. Flexible Invoicing & Payment Structure</h3>
+                        
+                        <label class="payment-option-card selected" id="unified-pay-card-a">
+                            <input type="radio" name="unified_payment_option" value="OPTION_A_100_UPFRONT" checked>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <strong style="color: #fff; font-size: 0.95rem;">Option A: 100% Upfront Settlement</strong>
+                                    <span class="badge-status paid">Recommended</span>
+                                </div>
+                                <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                                    Pay full rental cost + refundable security deposit immediately. Zero remaining balance at dispatch.
+                                </p>
+                            </div>
+                        </label>
+
+                        <label class="payment-option-card" id="unified-pay-card-b">
+                            <input type="radio" name="unified_payment_option" value="OPTION_B_DEPOSIT_ONLY">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <strong style="color: #fff; font-size: 0.95rem;">Option B: Security Deposit Now</strong>
+                                    <span class="badge-status partial">Pay Later</span>
+                                </div>
+                                <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                                    Pay only refundable security deposit today. Remaining rental balance is automatically invoiced upon delivery handover.
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Right Column: Quotation Summary Card -->
+                <div>
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; position: sticky; top: 140px;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #fff;">Quotation Summary</h3>
+                        
+                        <!-- Selected Gear Preview -->
+                        <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 14px;">
+                            <img id="chk-preview-img" src="https://cdn.21st.dev/assets/mirror/31/31ee902b46038d690f949a8be82c4b5673d554eac7456974c04950d78b4efe3d.jpg" alt="Item" style="width: 56px; height: 56px; object-fit: cover; border-radius: 6px;">
+                            <div>
+                                <h4 id="chk-preview-title" style="font-size: 0.92rem; color: #fff; margin-bottom: 2px;">Luxury Glamping Canvas Yurt</h4>
+                                <span id="chk-preview-category" style="font-size: 0.75rem; color: var(--accent-emerald);">Tents & Glamping</span>
+                            </div>
+                        </div>
+
+                        <!-- Date Configuration -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;">
+                            <div>
+                                <label style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700;">START DATE</label>
+                                <input type="date" id="chk-calc-start" class="form-input" style="padding: 6px; font-size: 0.8rem;">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700;">END DATE</label>
+                                <input type="date" id="chk-calc-end" class="form-input" style="padding: 6px; font-size: 0.8rem;">
+                            </div>
+                        </div>
+
+                        <!-- Cost Itemization -->
+                        <div class="quote-summary-box" style="margin-bottom: 16px;">
+                            <div class="quote-row">
+                                <span>Duration:</span>
+                                <strong id="chk-duration-text">3 Days</strong>
+                            </div>
+                            <div class="quote-row">
+                                <span>Gross Rental:</span>
+                                <span id="chk-subtotal-text">₹14,400</span>
+                            </div>
+                            <div class="quote-row discount">
+                                <span>Duration Tier Discount (10%):</span>
+                                <span id="chk-discount-text">-₹1,440</span>
+                            </div>
+                            <div class="quote-row">
+                                <span>Refundable Security Deposit:</span>
+                                <span id="chk-deposit-text">₹3,000</span>
+                            </div>
+                            <div class="quote-row total" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 6px;">
+                                <span>Total Amount:</span>
+                                <span id="chk-total-text" style="color: var(--accent-emerald);">₹15,960</span>
+                            </div>
+                            <div class="quote-row" style="background: rgba(16,185,129,0.08); padding: 6px 10px; border-radius: 4px; margin-top: 8px;">
+                                <strong style="color: #fff; font-size: 0.82rem;">Amount Due Now:</strong>
+                                <strong id="chk-due-now-text" style="color: var(--accent-gold); font-size: 1.1rem;">₹15,960</strong>
+                            </div>
+                        </div>
+
+                        <button id="btn-confirm-checkout" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px;">
+                            Confirm Order & Lock Stock →
+                        </button>
+
+                        <div id="checkout-result-box" style="display: none; background: rgba(16,185,129,0.12); border: 1px solid #10b981; border-radius: var(--radius-sm); padding: 12px; margin-top: 10px; text-align: left;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <strong style="color: #10b981; font-size: 0.88rem;">✓ Order Reserved Successfully!</strong>
+                                <span class="badge-status confirmed" id="res-order-id">ORD-XXXX</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-white); margin-bottom: 6px;">Stock locked in database. Digital dispatch token generated.</p>
+                            <a href="#phase-4" class="btn btn-secondary" style="width: 100%; padding: 6px; font-size: 0.78rem;">Proceed to Phase 4 Dispatch Handover ↓</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 4: DISPATCH & AUTOMATED PRE-RETURN CRON HUB
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-4">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 4 Architecture</span>
+                    <h2>Order Dispatch & Pre-Return Cron Automation Hub</h2>
+                    <p>Conduct physical handovers to change state from <code>CONFIRMED</code> to <code>PICKED_UP</code>, and trigger simulated automated $N$-day background cron alerts.</p>
+                </div>
+                <div>
+                    <span class="badge-status picked-up">Cron Daemon Active</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <!-- Block 1: Active Reserved Orders Ready for Pickup Handover -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">1. Reserved Orders (Ready for Dispatch)</h3>
+                        <span class="badge-status confirmed" id="count-dispatch-orders">2 Pending Handover</span>
+                    </div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">Select an order to issue dispatch documentation and transition status to customer possession.</p>
+
+                    <div id="dispatch-orders-list" style="max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Filled dynamically via script.js -->
+                    </div>
+                </div>
+
+                <!-- Block 2: Automated Pre-Return Cron Notification Simulator -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">2. Automated Cron Pre-Return Notifications</h3>
+                        <span class="badge-status" style="background: rgba(243,208,104,0.15); color: #f3d068;">Background Job</span>
+                    </div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+                        Simulates the background worker checking for upcoming returns within $N$ days and dispatching SMS/Email alerts.
+                    </p>
+
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
+                        <label style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Alert Lead Time (Days):</label>
+                        <select id="cron-lead-time" class="form-input" style="width: auto; padding: 4px 10px; font-size: 0.85rem;">
+                            <option value="1">1 Day Prior</option>
+                            <option value="2" selected>2 Days Prior (Standard)</option>
+                            <option value="3">3 Days Prior</option>
+                        </select>
+                        <button class="btn btn-primary" id="btn-trigger-cron" style="padding: 6px 14px; font-size: 0.8rem;">
+                            ⚡ Trigger Cron Job
+                        </button>
+                    </div>
+
+                    <!-- Terminal Output Box -->
+                    <div class="terminal-console-box">
+                        <div class="terminal-header">
+                            <span>CRON DAEMON LOGS (/api/cron/check-notifications)</span>
+                            <span id="cron-timestamp">STATUS: IDLE</span>
+                        </div>
+                        <div id="cron-terminal-output">
+                            [SYSTEM] Cron notification scheduler initialized.<br>
+                            [DAEMON] Monitoring active rentals in state: WITH_CUSTOMER.<br>
+                            [READY] Click "Trigger Cron Job" to simulate automated pre-return reminder scan.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 5: RETURN INSPECTION & LATE FEE PENALTY ENGINE
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-5">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 5 Architecture</span>
+                    <h2>Return Condition Inspection & Late Fee Settlement</h2>
+                    <p>Conduct physical condition checklist grading, calculate late return penalties, and atomically compute net deposit refund before restoring stock.</p>
+                </div>
+                <div>
+                    <span class="badge-status returned">Stock Auto-Restored</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;">
+                <!-- Left Column: Order Lookup & Inspection Checklist -->
+                <div>
+                    <!-- Order Selection -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem;">
+                        <label style="font-size: 0.85rem; font-weight: 700; color: #fff; display: block; margin-bottom: 8px;">
+                            Select Rented Order in Customer Possession:
+                        </label>
+                        <select id="return-order-select" class="form-input">
+                            <!-- Populated dynamically via script.js -->
+                        </select>
+                    </div>
+
+                    <!-- Condition Checklist -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #fff;">Physical Condition Grading</h3>
+
+                        <!-- 1. Equipment Condition -->
+                        <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">1. ITEM INTEGRITY</label>
+                        <div class="condition-grid">
+                            <div class="condition-card active" onclick="selectConditionGrading('FLAWLESS', 0, this)">
+                                <strong style="color: #fff; font-size: 0.85rem;">✨ Flawless / Good</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">No structural damage (₹0 Fee)</p>
+                            </div>
+                            <div class="condition-card" onclick="selectConditionGrading('MINOR_WEAR', 0, this)">
+                                <strong style="color: #fff; font-size: 0.85rem;">👌 Minor Wear & Tear</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Standard usage wear (₹0 Fee)</p>
+                            </div>
+                            <div class="condition-card danger" onclick="selectConditionGrading('DAMAGED', 1500, this)">
+                                <strong style="color: #f87171; font-size: 0.85rem;">⚠️ Damaged / Scratched</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Repairable damage (-₹1,500 Fee)</p>
+                            </div>
+                            <div class="condition-card danger" onclick="selectConditionGrading('BROKEN', 3000, this)">
+                                <strong style="color: #f87171; font-size: 0.85rem;">❌ Broken / Missing Parts</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Replacement cost (-₹3,000 Fee)</p>
+                            </div>
+                        </div>
+
+                        <!-- 2. Cleanliness -->
+                        <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px;">2. CLEANLINESS</label>
+                        <div class="condition-grid">
+                            <div class="condition-card active" onclick="selectCleanlinessGrading('CLEAN', 0, this)">
+                                <strong style="color: #fff; font-size: 0.85rem;">🧼 Pristine Clean</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">No cleaning required (₹0)</p>
+                            </div>
+                            <div class="condition-card danger" onclick="selectCleanlinessGrading('DIRTY', 500, this)">
+                                <strong style="color: #f87171; font-size: 0.85rem;">🧹 Needs Deep Clean</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Sanitization fee (-₹500)</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. Timeliness / Late Overdue Simulator -->
+                        <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px; margin-top: 14px;">3. RETURN TIMELINESS</label>
+                        <div class="condition-grid">
+                            <div class="condition-card active" onclick="selectTimelinessGrading(0, 0, this)">
+                                <strong style="color: #fff; font-size: 0.85rem;">⏱️ On-Time Return</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Within scheduled window (₹0)</p>
+                            </div>
+                            <div class="condition-card danger" onclick="selectTimelinessGrading(1, 800, this)">
+                                <strong style="color: #f87171; font-size: 0.85rem;">⏳ 1 Day Overdue</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Penalty formula: ₹800 late fee</p>
+                            </div>
+                            <div class="condition-card danger" onclick="selectTimelinessGrading(2, 1600, this)">
+                                <strong style="color: #f87171; font-size: 0.85rem;">🚨 2 Days Overdue</strong>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Penalty formula: ₹1,600 late fee</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Settlement & Deposit Refund Computation -->
+                <div>
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.5rem; position: sticky; top: 140px;">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #fff;">Escrow Deposit Settlement</h3>
+
+                        <div class="quote-summary-box" style="margin-bottom: 16px;">
+                            <div class="quote-row">
+                                <span>Security Deposit Held:</span>
+                                <strong id="ret-held-deposit" style="color: #fff;">₹3,000</strong>
+                            </div>
+                            <div class="quote-row" style="color: #f87171;">
+                                <span>Condition / Damage Fee:</span>
+                                <span id="ret-damage-fee">-₹0</span>
+                            </div>
+                            <div class="quote-row" style="color: #f87171;">
+                                <span>Cleanliness Sanitation Fee:</span>
+                                <span id="ret-cleaning-fee">-₹0</span>
+                            </div>
+                            <div class="quote-row" style="color: #f87171;">
+                                <span>Late Return Penalty:</span>
+                                <span id="ret-late-penalty">-₹0</span>
+                            </div>
+                            <div class="quote-row total" style="border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: 8px;">
+                                <span>Net Deposit to Refund:</span>
+                                <span id="ret-net-refund" style="color: var(--accent-emerald); font-size: 1.25rem;">₹3,000</span>
+                            </div>
+                        </div>
+
+                        <button id="btn-submit-return" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px;">
+                            Finalize Return & Restore Stock →
+                        </button>
+
+                        <div id="return-success-card" style="display: none; background: rgba(16,185,129,0.12); border: 1px solid #10b981; border-radius: var(--radius-sm); padding: 12px; margin-top: 10px; text-align: left;">
+                            <strong style="color: #10b981; font-size: 0.88rem;">✓ Return Inspection Approved!</strong>
+                            <p style="font-size: 0.8rem; color: #fff; margin-top: 4px;">Item stock incremented back to inventory. Refund of <strong id="ret-refund-amount-text">₹3,000</strong> dispatched to customer payment source.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         PHASE 6: ADMIN FINANCIAL LEDGER & MULTI-FORMAT CSV REPORTS
+         ========================================================================= -->
+    <section class="phase-section-wrap" id="phase-6">
+        <div class="phase-box">
+            <div class="phase-title-row">
+                <div>
+                    <span class="phase-header-badge">Phase 6 Architecture</span>
+                    <h2>Admin Operations Ledger & Multi-Format CSV Reports</h2>
+                    <p>Live operational KPIs, invoice tracking, comprehensive rental order ledgers, and one-click audit-ready CSV exports directly streamed from server APIs.</p>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <a href="/api/admin/reports/export-csv" class="btn btn-primary" download="rental-ledger-report.csv">
+                        ⬇️ Download Live CSV Report
+                    </a>
+                </div>
+            </div>
+
+            <!-- Operations Metrics -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem;">
+                    <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Total Platform Revenue</span>
+                    <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--accent-gold); margin-top: 4px;" id="kpi-revenue">₹78,400</h3>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);">↑ 22% vs last month</span>
+                </div>
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem;">
+                    <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Active Rentals</span>
+                    <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-top: 4px;" id="kpi-active-rentals">4 Units</h3>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">In customer possession</span>
+                </div>
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem;">
+                    <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Fleet Utilization</span>
+                    <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--accent-emerald); margin-top: 4px;" id="kpi-utilization">84%</h3>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);">Optimal availability</span>
+                </div>
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.2rem;">
+                    <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Escrow Deposits Held</span>
+                    <h3 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-top: 4px;" id="kpi-deposits">₹12,500</h3>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Protected in escrow</span>
+                </div>
+            </div>
+
+            <!-- Master Ledger Table -->
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Complete Rental Orders Ledger</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="ledger-search-input" class="form-input" placeholder="Search order ID or customer..." style="padding: 6px 12px; font-size: 0.8rem; width: 220px;">
+                    </div>
+                </div>
+
+                <div class="luxe-table-wrap">
+                    <table class="luxe-table" id="master-ledger-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Product Asset</th>
+                                <th>Duration</th>
+                                <th>Invoicing Structure</th>
+                                <th>Total Cost</th>
+                                <th>Deposit</th>
+                                <th>Order Status</th>
+                                <th>Invoice</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-ledger-tbody">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         MODALS & OVERLAYS
+         ========================================================================= -->
+
+    <!-- Digital Invoice Document Modal -->
+    <div id="invoice-modal-overlay" class="modal-backdrop">
+        <div class="modal-content-box" style="max-width: 620px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 16px;">
+                <div>
+                    <span class="logo-badge" style="margin-bottom: 6px; display: inline-block;">ESC-INVOICE-2026</span>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff;" id="inv-modal-number">INV-ORD-94821</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Issued by EscapeLuxe Platform • GST Verified</p>
+                </div>
+                <div style="text-align: right;">
+                    <span class="badge-status paid" id="inv-modal-status">PAID</span>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 4px;" id="inv-modal-date">Oct 16, 2026</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; font-size: 0.85rem;">
+                <div>
+                    <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Billed To:</span>
+                    <p style="font-weight: 700; color: #fff;" id="inv-modal-renter">Alex Rivera</p>
+                    <p style="color: var(--text-dim);" id="inv-modal-email">alex@escapeluxe.com</p>
+                </div>
+                <div>
+                    <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Payment Terms:</span>
+                    <p style="font-weight: 700; color: #fff;" id="inv-modal-terms">Option A: 100% Upfront Settlement</p>
+                    <p style="color: var(--text-dim);">Method: Razorpay UPI / Card Escrow</p>
+                </div>
+            </div>
+
+            <!-- Itemized Table -->
+            <div class="quote-summary-box" style="margin-bottom: 16px;">
+                <div class="quote-row">
+                    <span id="inv-modal-item">Luxury Glamping Canvas Yurt (3 Days)</span>
+                    <strong id="inv-modal-subtotal">₹14,400</strong>
+                </div>
+                <div class="quote-row discount">
+                    <span>Duration Tier Savings</span>
+                    <span id="inv-modal-discount">-₹1,440</span>
+                </div>
+                <div class="quote-row">
+                    <span>Refundable Escrow Security Deposit</span>
+                    <span id="inv-modal-deposit">₹3,000</span>
+                </div>
+                <div class="quote-row total" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 6px;">
+                    <span>Grand Total Settled:</span>
+                    <span style="color: var(--accent-emerald);" id="inv-modal-grandtotal">₹15,960</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="window.print()" style="flex: 1;">Print / Save PDF</button>
+                <button class="btn btn-secondary" onclick="closeInvoiceModal()" style="flex: 1;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configure Product Modal (Phase 1) -->
+    <div id="product-modal-overlay" class="modal-backdrop">
+        <div class="modal-content-box" style="max-width: 500px; text-align: left;">
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 6px;">Configure Rentable Asset Unit</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Update rates, security deposits, and maintenance buffer hours.</p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div>
+                    <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Product Asset Name</label>
+                    <input type="text" id="cfg-name" class="form-input" value="Custom Luxury Glamping Yurt">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Daily Rate (₹)</label>
+                        <input type="number" id="cfg-daily" class="form-input" value="4800">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Security Deposit (₹)</label>
+                        <input type="number" id="cfg-deposit" class="form-input" value="3000">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Total Inventory Stock</label>
+                        <input type="number" id="cfg-stock" class="form-input" value="5">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Buffer Hours (Turnaround)</label>
+                        <input type="number" id="cfg-buffer" class="form-input" value="4">
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 18px;">
+                <button class="btn btn-primary" onclick="saveProductConfig()" style="flex: 1;">Save Configuration</button>
+                <button class="btn btn-secondary" onclick="closeProductModal()" style="flex: 1;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (OTP Login) -->
+    <div id="auth-modal-overlay" class="modal-backdrop">
+        <div class="modal-content-box">
+            <div class="role-slider-wrap">
+                <div class="role-slider-thumb" id="role-slider-thumb"></div>
+                <button type="button" class="role-pill-btn active" id="role-btn-user">Renter</button>
+                <button type="button" class="role-pill-btn" id="role-btn-seller">Equipment Owner</button>
+            </div>
+
+            <h3 id="auth-title" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px;">Log in to EscapeLuxe</h3>
+            <p id="auth-subtitle" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Enter your email or phone to receive an instant OTP.</p>
+
+            <div id="auth-step-1">
+                <input type="text" id="auth-identifier" class="form-input" placeholder="Email or Mobile (e.g. alex@escapeluxe.com)">
+                <button type="button" id="auth-continue-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 8px;">Send Verification Code →</button>
+            </div>
+
+            <div id="auth-step-2" style="display: none;">
+                <div style="background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: 8px; padding: 10px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.82rem; color: #10b981;">Simulated Code: <strong id="simulated-otp-code">482910</strong></span>
+                    <button type="button" id="btn-autofill-otp" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">Auto-Fill</button>
+                </div>
+                <input type="text" id="auth-otp-input" class="form-input" placeholder="Enter 6-Digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem; font-weight: 800;">
+                <button type="button" id="auth-verify-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 8px;">Verify & Access Portal</button>
+            </div>
+
+            <p id="close-auth-modal" style="color: var(--text-muted); cursor: pointer; font-size: 0.85rem; margin-top: 16px;">Cancel</p>
+        </div>
+    </div>
+
+    <!-- Floating AI Rental Concierge -->
+    <div id="ai-fab-btn" class="ai-fab">✨ Concierge AI</div>
+
+    <div id="ai-chat-window" class="ai-chat-window" style="display: none;">
+        <div class="chat-header">
+            <span>✨ EscapeLuxe AI Concierge</span>
+            <span id="close-ai-chat" style="cursor: pointer; font-size: 1.2rem;">&times;</span>
+        </div>
+        <div class="chat-body" id="ai-chat-body">
+            <div class="chat-msg ai">Hello! I am your AI Rental Concierge. I can help you compute dynamic duration discounts, check return inspection checklists, or navigate all 6 platform phases. How may I assist you today?</div>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="ai-chat-input" placeholder="Ask about policies, gear, or quotes...">
+            <button id="ai-send-btn" class="btn btn-primary" style="padding: 6px 14px;">Send</button>
+        </div>
+    </div>
+
+    <!-- Master Footer -->
+    <footer class="luxe-footer">
+        <div class="footer-grid">
+            <div>
+                <a href="#hero-section" class="luxe-logo" style="margin-bottom: 12px; display: inline-flex;">
+                    <span class="logo-badge">21ST.DEV</span>
+                    EscapeLuxe
+                </a>
+                <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 320px; line-height: 1.6;">
+                    The unified luxury outdoor rental platform. Merging all 6 project roadmap phases into one fluid, single-page master experience.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Architecture Phases</h4>
+                <ul>
+                    <li><a href="#phase-1">Phase 1: Inventory & Pricelists</a></li>
+                    <li><a href="#phase-2">Phase 2: Dynamic Catalog & AI</a></li>
+                    <li><a href="#phase-3">Phase 3: Quotation & Checkout</a></li>
+                    <li><a href="#phase-4">Phase 4: Dispatch & Cron Pre-Return</a></li>
+                    <li><a href="#phase-5">Phase 5: Return & Inspection</a></li>
+                    <li><a href="#phase-6">Phase 6: Invoices & CSV Reports</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>System Capabilities</h4>
+                <ul>
+                    <li><a href="#phase-1">Multi-Unit Time Pricing (Hr/Day/Wk/Mo)</a></li>
+                    <li><a href="#phase-2">Turnaround Maintenance Buffers</a></li>
+                    <li><a href="#phase-3">Option A vs Option B Invoicing</a></li>
+                    <li><a href="#phase-4">Automated Background Cron Workers</a></li>
+                    <li><a href="#phase-5">Overdue Late Penalty Engine</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Platform Trust</h4>
+                <ul>
+                    <li><a href="#phase-3">Escrow Security Deposit Protection</a></li>
+                    <li><a href="#phase-3">Digital E-Signature Contracts</a></li>
+                    <li><a href="#phase-6">Streamed Audit CSV Ledger</a></li>
+                    <li><a href="../index.html">Switch to White & Gold Theme</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 EscapeLuxe Platform. All rights reserved.</span>
+            <span>Master Architecture • All Roadmap Phases Unified</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

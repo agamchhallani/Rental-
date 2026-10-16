@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Catalog • EscapeLuxe Rental Management</title>
+    <meta name="description" content="Browse our luxury outdoor rental catalog. Check date availability, apply tier duration discounts, and get instant quotes.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="luxe-nav">
+        <a href="index.html" class="luxe-logo">
+            <span class="logo-badge">21ST.DEV</span>
+            EscapeLuxe
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="catalog.html" class="active">Catalog</a></li>
+            <li><a href="pricelists.html">Pricelists</a></li>
+            <li><a href="returns.html">Track & Returns</a></li>
+            <li><a href="admin.html">Admin Console</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="btn btn-secondary" id="nav-cart-btn">
+                🛒 Cart (<span class="cart-count-badge">0</span>)
+            </button>
+            <div class="user-nav-slot">
+                <button class="btn btn-primary open-login-btn">Log in</button>
+            </div>
+            <a href="../index.html" class="btn-switch-theme" title="Switch back to original White and Gold theme">
+                <span>✦</span>
+                <span>White & Gold Theme</span>
+                <span>→</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="catalog-wrapper">
+        <div class="section-header">
+            <span class="section-tag">Phase 2: Rental Catalog</span>
+            <h1 class="section-title">Luxury Rental Catalog</h1>
+            <p class="section-subtitle">Select your rental dates to verify real-time inventory availability and calculate multi-day tier savings.</p>
+        </div>
+
+        <!-- Date Availability Filter Bar -->
+        <div class="date-filter-bar">
+            <div class="date-inputs">
+                <div class="date-group">
+                    <label>Pickup / Start Date</label>
+                    <input type="date" id="catalog-start-date">
+                </div>
+                <div class="date-group">
+                    <label>Return / End Date</label>
+                    <input type="date" id="catalog-end-date">
+                </div>
+            </div>
+            <div>
+                <span id="date-duration-indicator" style="font-size: 0.88rem; font-weight: 700; color: var(--accent-emerald); background: var(--accent-emerald-soft); padding: 8px 16px; border-radius: var(--radius-full); border: 1px solid rgba(16,185,129,0.3);">
+                    Checking duration...
+                </span>
+            </div>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs">
+            <button class="cat-tab active" data-cat="all">All Equipment</button>
+            <button class="cat-tab" data-cat="tents">Tents & Glamping</button>
+            <button class="cat-tab" data-cat="cooking">Outdoor Cooking</button>
+            <button class="cat-tab" data-cat="water">Lakeside & Canoes</button>
+            <button class="cat-tab" data-cat="wellness">Saunas & Spa</button>
+            <button class="cat-tab" data-cat="adventure">Expedition Kits</button>
+            <button class="cat-tab" data-cat="cinema">Cinema & Drones</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="catalog-products-grid">
+            <!-- Populated dynamically by script.js -->
+        </div>
+    </main>
+
+    <!-- Quotation / Cart Checkout Modal (Phase 3) -->
+    <div id="quotation-modal" class="modal-backdrop">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <h3>Rental Quotation & Contract</h3>
+                <p>Select dates to apply dynamic duration discounts and reserve gear.</p>
+            </div>
+
+            <!-- Date Selectors -->
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="flex: 1; text-align: left;">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">START DATE</label>
+                    <input type="date" id="quote-start-date" class="form-input">
+                </div>
+                <div style="flex: 1; text-align: left;">
+                    <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">END DATE</label>
+                    <input type="date" id="quote-end-date" class="form-input">
+                </div>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="quote-items-list" style="max-height: 180px; overflow-y: auto; text-align: left; margin-bottom: 15px;"></div>
+
+            <!-- Cost Breakdown -->
+            <div class="quote-summary-box">
+                <div class="quote-row">
+                    <span>Duration:</span>
+                    <strong id="quote-days-count">3 Days</strong>
+                </div>
+                <div class="quote-row">
+                    <span>Equipment Subtotal:</span>
+                    <span id="quote-subtotal">₹0</span>
+                </div>
+                <div class="quote-row discount">
+                    <span>Tier Duration Discount:</span>
+                    <span id="quote-discount">-₹0</span>
+                </div>
+                <div class="quote-row">
+                    <span>Refundable Security Deposit:</span>
+                    <span id="quote-deposit">₹0</span>
+                </div>
+                <div class="quote-row total">
+                    <span>Total Estimate:</span>
+                    <span id="quote-total" style="color: var(--accent-emerald);">₹0</span>
+                </div>
+            </div>
+
+            <button id="proceed-checkout-btn" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px;" onclick="location.href='checkout.html'">
+                Review Contract & Select Payment (100% vs Deposit) →
+            </button>
+            <p id="close-quotation-modal" style="color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">Close</p>
+        </div>
+    </div>
+
+    <!-- Product Detail & Time-Dependent Pricing Matrix Modal (Sitemap: /store/[productId]) -->
+    <div id="product-detail-modal" class="modal-backdrop">
+        <div class="modal-content-box" style="max-width: 580px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span class="product-category-badge" id="modal-p-cat">Tents</span>
+                <span id="close-detail-modal" style="cursor: pointer; font-size: 1.4rem; color: var(--text-muted);">&times;</span>
+            </div>
+            
+            <h3 id="modal-p-title" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px;">Product Detail</h3>
+            <p id="modal-p-desc" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Description</p>
+
+            <!-- Time-Dependent Pricing Matrix Table -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 14px; margin-bottom: 16px;">
+                <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 8px;">Time-Dependent Rental Rate Matrix</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center;">
+                    <div style="background: var(--bg-surface); padding: 8px; border-radius: 6px;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted);">HOURLY</span>
+                        <strong style="display: block; font-size: 0.95rem; color: #fff;" id="matrix-rate-hr">₹400</strong>
+                    </div>
+                    <div style="background: var(--bg-surface); padding: 8px; border-radius: 6px; border: 1px solid var(--accent-emerald);">
+                        <span style="font-size: 0.72rem; color: var(--accent-emerald);">DAILY (BASE)</span>
+                        <strong style="display: block; font-size: 0.95rem; color: #fff;" id="matrix-rate-day">₹3,500</strong>
+                    </div>
+                    <div style="background: var(--bg-surface); padding: 8px; border-radius: 6px;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted);">WEEKLY (18% OFF)</span>
+                        <strong style="display: block; font-size: 0.95rem; color: #fff;" id="matrix-rate-wk">₹18,000</strong>
+                    </div>
+                    <div style="background: var(--bg-surface); padding: 8px; border-radius: 6px;">
+                        <span style="font-size: 0.72rem; color: var(--text-muted);">MONTHLY (25% OFF)</span>
+                        <strong style="display: block; font-size: 0.95rem; color: #fff;" id="matrix-rate-mo">₹65,000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Companion Bundle Suggestion -->
+            <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <div style="font-size: 0.85rem;">
+                    <strong style="color: var(--accent-emerald);">✨ AI Companion Bundle</strong>
+                    <div style="color: var(--text-muted);">Bundle matching accessories & save an extra 10% on security deposit.</div>
+                </div>
+                <span class="product-category-badge" style="font-size: 0.75rem;">Eligible</span>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button id="modal-btn-add" class="btn btn-primary" style="flex: 2; padding: 12px;">Add to Quotation & Cart +</button>
+                <a href="checkout.html" class="btn btn-secondary" style="flex: 1; padding: 12px; text-align: center;">Direct Checkout →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Phase 1) -->
+    <div id="auth-modal-overlay" class="modal-backdrop">
+        <div class="modal-content-box">
+            <div class="role-slider-wrap">
+                <div class="role-slider-thumb" id="role-slider-thumb"></div>
+                <button type="button" class="role-pill-btn active" id="role-btn-user">Renter</button>
+                <button type="button" class="role-pill-btn" id="role-btn-seller">Equipment Owner</button>
+            </div>
+            <h3 id="auth-title" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;">Log in to EscapeLuxe</h3>
+            <p id="auth-subtitle" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Enter your email or phone number to receive an instant OTP.</p>
+            <div id="auth-step-1">
+                <input type="text" id="auth-identifier" class="form-input" placeholder="Email or Mobile">
+                <button type="button" id="auth-continue-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 6px;">Send Verification Code →</button>
+            </div>
+            <div id="auth-step-2" style="display: none;">
+                <div style="background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: 8px; padding: 10px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; color: #10b981;">Simulated Code: <strong id="simulated-otp-code">482910</strong></span>
+                    <button type="button" id="btn-autofill-otp" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">Auto-Fill</button>
+                </div>
+                <input type="text" id="auth-otp-input" class="form-input" placeholder="Enter 6-Digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem; font-weight: 800;">
+                <button type="button" id="auth-verify-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 6px;">Verify & Access Portal</button>
+            </div>
+            <p id="close-auth-modal" style="color: var(--text-muted); cursor: pointer; font-size: 0.9rem; margin-top: 18px;">Cancel</p>
+        </div>
+    </div>
+
+    <!-- Floating AI Rental Concierge (Phase 5) -->
+    <div id="ai-fab-btn" class="ai-fab">✨ Concierge AI</div>
+    <div id="ai-chat-window" class="ai-chat-window" style="display: none;">
+        <div class="chat-header">
+            <span>✨ EscapeLuxe AI Concierge</span>
+            <span id="close-ai-chat" style="cursor: pointer; font-size: 1.2rem;">&times;</span>
+        </div>
+        <div class="chat-body" id="ai-chat-body">
+            <div class="chat-msg ai">Hello! Looking for specific camping or outdoor gear? Ask me anything about availability, deposits, or discounts!</div>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="ai-chat-input" placeholder="Ask about gear or quotes...">
+            <button id="ai-send-btn" class="btn btn-primary" style="padding: 6px 14px;">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="luxe-footer">
+        <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border-top: none;">
+            <span>© 2026 EscapeLuxe Platform. All rights reserved.</span>
+            <span>Roadmap Phase 2: Catalog & Availability Engine</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

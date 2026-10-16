@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member & Fleet Dashboard • EscapeLuxe</title>
+    <meta name="description" content="Manage active reservations, monitor fleet revenue, and list equipment in the EscapeLuxe rental dashboard.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="luxe-nav">
+        <a href="index.html" class="luxe-logo">
+            <span class="logo-badge">21ST.DEV</span>
+            EscapeLuxe
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="catalog.html">Catalog</a></li>
+            <li><a href="pricelists.html">Pricelists</a></li>
+            <li><a href="returns.html">Track & Returns</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="btn btn-secondary" id="nav-cart-btn">
+                🛒 Cart (<span class="cart-count-badge">0</span>)
+            </button>
+            <div class="user-nav-slot">
+                <button class="btn btn-primary open-login-btn">Log in</button>
+            </div>
+            <a href="../index.html" class="btn-switch-theme" title="Switch back to original White and Gold theme">
+                <span>✦</span>
+                <span>White & Gold Theme</span>
+                <span>→</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Section -->
+    <main class="catalog-wrapper" style="max-width: 1040px;">
+        <div class="section-header">
+            <span class="section-tag">Phase 5: Dashboards & Operations</span>
+            <h1 class="section-title">Rental Control Center</h1>
+            <p class="section-subtitle">Switch seamlessly between your Renter gear schedule and your Equipment Owner fleet management portal.</p>
+        </div>
+
+        <!-- Role Workspace Switcher Tabs -->
+        <div style="display: flex; justify-content: center; margin-bottom: 2.5rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 5px; border-radius: var(--radius-full); display: inline-flex; gap: 8px;">
+                <button id="tab-btn-renter" class="cat-tab active" style="padding: 10px 24px;">Renter Workspace</button>
+                <button id="tab-btn-seller" class="cat-tab" style="padding: 10px 24px;">Owner & Fleet Portal</button>
+            </div>
+        </div>
+
+        <!-- 1. RENTER WORKSPACE VIEW -->
+        <div id="view-renter">
+            <!-- Summary Stats -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Active Rentals</span>
+                    <strong style="font-size: 2rem; color: #fff; margin: 4px 0;">2 Units</strong>
+                    <span style="font-size: 0.78rem; color: var(--accent-emerald);">Return scheduled for Friday</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Held Security Deposit</span>
+                    <strong style="font-size: 2rem; color: var(--accent-emerald); margin: 4px 0;">₹3,500</strong>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">100% refundable upon check-in</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Tier Member Savings</span>
+                    <strong style="font-size: 2rem; color: #fff; margin: 4px 0;">₹2,840</strong>
+                    <span style="font-size: 0.78rem; color: var(--accent-emerald);">Saved via multi-day discounts</span>
+                </div>
+            </div>
+
+            <!-- Active Rentals List -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; text-align: left; margin-bottom: 2rem;">
+                <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1.2rem;">Your Active Gear Bookings</h3>
+
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <!-- Booking 1 -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <span style="font-size: 2.2rem;">🏕️</span>
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Luxury Glamping Canvas Yurt</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Ref: ORD-94821 • Return Due: Oct 17, 2026 at 6:00 PM</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="stock-indicator">Active In Use</span>
+                            <button class="btn btn-secondary" style="padding: 8px 16px;" onclick="alert('Digital Return QR Code:\n\n[QR-ORD-94821]\nScan at warehouse check-in for instant deposit refund.')">Show Return QR</button>
+                        </div>
+                    </div>
+
+                    <!-- Booking 2 -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <span style="font-size: 2.2rem;">🛶</span>
+                            <div>
+                                <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Twin Cedar Lakeside Canoes Package</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Ref: ORD-71934 • Return Due: Oct 20, 2026 at 4:00 PM</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="stock-indicator" style="color: var(--accent-gold);">Dispatched</span>
+                            <a href="returns.html" class="btn btn-secondary" style="padding: 8px 16px;">Track Delivery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. SELLER & FLEET PORTAL VIEW -->
+        <div id="view-seller" style="display: none;">
+            <!-- Fleet KPIs -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Gross Fleet Revenue</span>
+                    <strong style="font-size: 2rem; color: var(--accent-emerald); margin: 4px 0;">₹1,42,800</strong>
+                    <span style="font-size: 0.78rem; color: #10b981;">+18% growth this month</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Active Fleet Dispatches</span>
+                    <strong style="font-size: 2rem; color: #fff; margin: 4px 0;">12 Assets</strong>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">0 overdue returns</span>
+                </div>
+                <div class="bento-card" style="padding: 1.6rem;">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Fleet Return Rate</span>
+                    <strong style="font-size: 2rem; color: #fff; margin: 4px 0;">99.4%</strong>
+                    <span style="font-size: 0.78rem; color: #10b981;">Clean inspection average</span>
+                </div>
+            </div>
+
+            <!-- Add New Rental Asset Form (Phase 2 & Phase 5) -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.2rem; text-align: left; margin-bottom: 2.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.3rem; font-weight: 800;">List New Rentable Asset</h3>
+                    <span class="product-category-badge">Owner Management</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Publish equipment directly to the live EscapeLuxe catalog with automated deposit and pricing rules.</p>
+
+                <form id="owner-add-product-form" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <input type="text" id="owner-p-name" class="form-input" placeholder="Equipment Name (e.g. Expedition Arctic Tent)" required style="flex: 2; min-width: 220px; margin-bottom: 0;">
+                    
+                    <select id="owner-p-cat" class="form-input" style="flex: 1; min-width: 140px; margin-bottom: 0; cursor: pointer;">
+                        <option value="tents">Tents</option>
+                        <option value="cooking">Cooking</option>
+                        <option value="water">Water & Canoes</option>
+                        <option value="wellness">Sauna</option>
+                        <option value="cinema">Cinema & Drones</option>
+                    </select>
+
+                    <input type="number" id="owner-p-price" class="form-input" placeholder="Daily Rate (₹)" required style="flex: 1; min-width: 120px; margin-bottom: 0;">
+                    <input type="number" id="owner-p-stock" class="form-input" placeholder="Units (e.g. 5)" required style="flex: 1; min-width: 100px; margin-bottom: 0;">
+                    
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">Publish Listing +</button>
+                </form>
+                <div id="owner-add-msg" style="display: none; margin-top: 15px; color: var(--accent-emerald); font-weight: 700;">
+                    ✓ Asset published to live catalog! Stock is now available for booking.
+                </div>
+            </div>
+
+            <!-- Exporting & Financial Reports (Roadmap Phase 5) -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; text-align: left;">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Fleet Financial Statements</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Download verified accounting logs and rental invoices.</p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="alert('Exporting Financial Report (PDF)... Download generated!')">📄 Export Statement (PDF)</button>
+                    <button class="btn btn-secondary" onclick="alert('Exporting Rental Ledger (CSV)... Download ready!')">📊 Export Ledger (CSV)</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quotation / Cart Checkout Modal (Phase 3) -->
+    <div id="quotation-modal" class="modal-backdrop">
+        <div class="modal-content-box">
+            <div class="modal-header"><h3>Rental Quotation & Contract</h3><p>Select dates to apply dynamic duration discounts.</p></div>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="flex: 1; text-align: left;"><label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">START DATE</label><input type="date" id="quote-start-date" class="form-input"></div>
+                <div style="flex: 1; text-align: left;"><label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">END DATE</label><input type="date" id="quote-end-date" class="form-input"></div>
+            </div>
+            <div id="quote-items-list" style="max-height: 180px; overflow-y: auto; text-align: left; margin-bottom: 15px;"></div>
+            <div class="quote-summary-box">
+                <div class="quote-row"><span>Duration:</span><strong id="quote-days-count">3 Days</strong></div>
+                <div class="quote-row"><span>Equipment Subtotal:</span><span id="quote-subtotal">₹0</span></div>
+                <div class="quote-row discount"><span>Tier Duration Discount:</span><span id="quote-discount">-₹0</span></div>
+                <div class="quote-row"><span>Refundable Security Deposit:</span><span id="quote-deposit">₹0</span></div>
+                <div class="quote-row total"><span>Total Estimate:</span><span id="quote-total" style="color: var(--accent-emerald);">₹0</span></div>
+            </div>
+            <button id="proceed-checkout-btn" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; margin-bottom: 10px;">Confirm & Reserve Contract →</button>
+            <p id="close-quotation-modal" style="color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">Close</p>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Phase 1) -->
+    <div id="auth-modal-overlay" class="modal-backdrop">
+        <div class="modal-content-box">
+            <div class="role-slider-wrap">
+                <div class="role-slider-thumb" id="role-slider-thumb"></div>
+                <button type="button" class="role-pill-btn active" id="role-btn-user">Renter</button>
+                <button type="button" class="role-pill-btn" id="role-btn-seller">Equipment Owner</button>
+            </div>
+            <h3 id="auth-title" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;">Log in to EscapeLuxe</h3>
+            <p id="auth-subtitle" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Enter your email or phone to receive an instant OTP.</p>
+            <div id="auth-step-1">
+                <input type="text" id="auth-identifier" class="form-input" placeholder="Email or Mobile">
+                <button type="button" id="auth-continue-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 6px;">Send Verification Code →</button>
+            </div>
+            <div id="auth-step-2" style="display: none;">
+                <div style="background: rgba(16,185,129,0.1); border: 1px solid #10b981; border-radius: 8px; padding: 10px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; color: #10b981;">Simulated Code: <strong id="simulated-otp-code">482910</strong></span>
+                    <button type="button" id="btn-autofill-otp" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">Auto-Fill</button>
+                </div>
+                <input type="text" id="auth-otp-input" class="form-input" placeholder="Enter 6-Digit OTP" maxlength="6" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem; font-weight: 800;">
+                <button type="button" id="auth-verify-btn" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 6px;">Verify & Access Portal</button>
+            </div>
+            <p id="close-auth-modal" style="color: var(--text-muted); cursor: pointer; font-size: 0.9rem; margin-top: 18px;">Cancel</p>
+        </div>
+    </div>
+
+    <!-- Floating AI Rental Concierge (Phase 5) -->
+    <div id="ai-fab-btn" class="ai-fab">✨ Concierge AI</div>
+    <div id="ai-chat-window" class="ai-chat-window" style="display: none;">
+        <div class="chat-header"><span>✨ EscapeLuxe AI Concierge</span><span id="close-ai-chat" style="cursor: pointer; font-size: 1.2rem;">&times;</span></div>
+        <div class="chat-body" id="ai-chat-body"><div class="chat-msg ai">Need assistance checking your active gear or reviewing fleet revenue? Ask me!</div></div>
+        <div class="chat-input-row"><input type="text" id="ai-chat-input" placeholder="Type message..."><button id="ai-send-btn" class="btn btn-primary" style="padding: 6px 14px;">Send</button></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="luxe-footer">
+        <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border-top: none;">
+            <span>© 2026 EscapeLuxe Platform. All rights reserved.</span>
+            <span>Roadmap Phase 5: Multi-Role Dashboard & Fleet Analytics</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Workspace Tab Switcher
+        const tabRenter = document.getElementById('tab-btn-renter');
+        const tabSeller = document.getElementById('tab-btn-seller');
+        const viewRenter = document.getElementById('view-renter');
+        const viewSeller = document.getElementById('view-seller');
+
+        tabRenter.addEventListener('click', () => {
+            tabRenter.classList.add('active');
+            tabSeller.classList.remove('active');
+            viewRenter.style.display = 'block';
+            viewSeller.style.display = 'none';
+        });
+
+        tabSeller.addEventListener('click', () => {
+            tabSeller.classList.add('active');
+            tabRenter.classList.remove('active');
+            viewSeller.style.display = 'block';
+            viewRenter.style.display = 'none';
+        });
+
+        // Owner Add Product form
+        const ownerForm = document.getElementById('owner-add-product-form');
+        if (ownerForm) {
+            ownerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('owner-p-name').value;
+                const cat = document.getElementById('owner-p-cat').value;
+                const price = parseInt(document.getElementById('owner-p-price').value, 10);
+                const stock = parseInt(document.getElementById('owner-p-stock').value, 10);
+
+                LUXE_PRODUCTS.push({
+                    id: "lux-" + Date.now(),
+                    name: name,
+                    category: cat,
+                    price: price,
+                    stock: stock,
+                    image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80",
+                    description: "High-grade verified equipment freshly provisioned by owner.",
+                    deposit: Math.round(price * 0.3)
+                });
+
+                document.getElementById('owner-add-msg').style.display = 'block';
+                setTimeout(() => document.getElementById('owner-add-msg').style.display = 'none', 3000);
+                ownerForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>

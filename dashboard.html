@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard • RentFlow LUXE</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon"></div>
+            <h1>RentFlow <span>LUXE</span></h1>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn btn-secondary theme-btn" aria-label="Toggle Theme">☀️</button>
+            <button class="btn btn-primary" id="navbar-login-btn">Log in</button>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Section -->
+    <main class="content-section" style="padding: 4rem 6% 6rem; min-height: 85vh;">
+        <div class="section-header">
+            <span class="section-tag">Member Workspace</span>
+            <h1 class="section-title">Your Rental Hub</h1>
+            <p class="section-subtitle">Manage upcoming reservations, track return schedules, and view insurance coverage in real time.</p>
+        </div>
+
+        <div class="dashboard-mockup">
+            <div class="mockup-header">
+                <div>
+                    <span>Account Overview</span>
+                    <span id="user-display-label" style="font-size: 0.85rem; color: var(--gold-600); margin-left: 10px; font-weight: 600;">(Demo Account)</span>
+                </div>
+                <span class="product-tag">Status: Verified Gold Member</span>
+            </div>
+
+            <div class="mockup-content">
+                <div class="mockup-stat">
+                    <span>Total Bookings Value</span>
+                    <strong>₹1,02,400</strong>
+                    <span style="font-size: 0.78rem; color: #10b981; margin-top: 4px; display: block;">+14% from last month</span>
+                </div>
+                <div class="mockup-stat">
+                    <span>Active Rentals</span>
+                    <strong>2 Gear Kits</strong>
+                    <span style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; display: block;">1 Return due Friday</span>
+                </div>
+                <div class="mockup-stat">
+                    <span>Luxe Reward Points</span>
+                    <strong>3,850 pts</strong>
+                    <span style="font-size: 0.78rem; color: var(--gold-600); margin-top: 4px; display: block;">₹1,925 credit redeemable</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+                <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; text-align: left;">Current Equipment in Use</h4>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius); flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 1.8rem;">📸</span>
+                            <div>
+                                <strong style="font-size: 1rem;">Sony FX3 Cinema Rig Package</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Serial: #FX3-9821 • Rental Duration: 3 Days</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="stock-status">On Schedule</span>
+                            <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Extend Booking</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius); flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 1.8rem;">🏕️</span>
+                            <div>
+                                <strong style="font-size: 1rem;">All-Weather Expedition Tent</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Serial: #CAMP-4402 • Return by Sunday 6 PM</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="stock-status">Insured</span>
+                            <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">Generate Return QR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap;">
+                <a href="products.html" class="btn btn-secondary">Explore More Gear</a>
+                <a href="admin.html" class="btn btn-primary">Open Seller & Admin Portal →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Luxury Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h2>RentFlow</h2>
+                </div>
+                <p>The premium peer-to-peer and enterprise rental network. Engineered with 21st.dev components in an opulent white & gold design system.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">All Catalog</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                    <li><a href="dashboard.html">Client Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Creator Gear</a></li>
+                    <li><a href="#">Outdoor & Expeditions</a></li>
+                    <li><a href="#">Enterprise Fleets</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust & Safety</h4>
+                <ul>
+                    <li><a href="#">Damage Coverage</a></li>
+                    <li><a href="#">OTP Verification</a></li>
+                    <li><a href="#">24/7 AI Concierge</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 RentFlow Technologies Inc. All rights reserved.</span>
+            <span>Crafted with 21st.dev White & Golden Architecture</span>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = localStorage.getItem('rentflow_user');
+            if (user) {
+                const label = document.getElementById('user-display-label');
+                if (label) label.innerText = `(${user})`;
+            }
+        });
+    </script>
+</body>
+</html>
