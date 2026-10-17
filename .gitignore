@@ -1,17 +1,20 @@
-# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Environment and Secrets
+# ==============================================================================
+# SECURE VAULT (API KEYS, SECRETS, PRIVATE CHATS) - NEVER PUSH TO GITHUB
+# ==============================================================================
+secure/
+secure/*
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
 *.pem
 *.key
 credentials.json
+api_keys.json
+
+# Dependencies
+node_modules/
+**/node_modules/
+/.pnp
+.pnp.js
 
 # Large installer files & binaries
 *.msi
